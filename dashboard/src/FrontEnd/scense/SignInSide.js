@@ -32,24 +32,21 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignInSide() {
+export default function SignInSide({ setIsAuthenticated }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedInAdmin, setIsLoggedInAdmin] = useState(false); // Add this line
 
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
-  
+    
     try {
       const success = await AuthService.login(email, password);
 
-      
-      
       if (success) {
-        setIsLoggedInAdmin(true);
+        setIsAuthenticated(true);
         navigate("/dashboard-admin");
       } else {
         // Handle login failure and display an error message to the user

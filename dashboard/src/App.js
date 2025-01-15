@@ -16,7 +16,8 @@ import AddWebsiteGallery from "./HodViews/scense/websites/addWebsiteGallery";
 import Landing from "./landingpage/landing";
 import "./App.css";
 import Payment from "./payment/payment";
-
+import ProtectedRoute from "./Auth/ProtectedRoute";
+import { useState } from "react";
 
 const HodViewsLayout = ({ children }) => {
   const [theme, colorMode] = useMode();
@@ -39,6 +40,9 @@ const HodViewsLayout = ({ children }) => {
 
 // Update the App component to use HodViewsLayout for HodViews pages
 function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("isLoggedIn") === "true");
+
   return (
     <Routes>
       
@@ -51,7 +55,7 @@ function App() {
       <Route
         path="/sign-in"
         element={
-          <SignInSide />
+          <SignInSide setIsAuthenticated={setIsAuthenticated} />
         }
       />
       <Route
@@ -70,25 +74,32 @@ function App() {
       <Route
         path="/dashboard-admin"
         element={
-          <HodViewsLayout>
-            <DashboardAdmin />
-          </HodViewsLayout>
+          <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <HodViewsLayout>
+              <DashboardAdmin />
+            </HodViewsLayout>
+          </ProtectedRoute>
+          
         }
       />
       <Route
         path="/team-admin"
         element={
-          <HodViewsLayout>
-            <TeamAdmin />
-          </HodViewsLayout>
+          <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <HodViewsLayout>
+              <TeamAdmin />
+            </HodViewsLayout>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/addteam"
         element={
-          <HodViewsLayout>
-            <AddTeam />
-          </HodViewsLayout>
+          <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <HodViewsLayout>
+              <AddTeam />
+            </HodViewsLayout>
+          </ProtectedRoute>
         }
       />
 
@@ -136,9 +147,11 @@ function App() {
       <Route
         path="/add-product"
         element={
-          <HodViewsLayout>
-            <AddProduct />
-          </HodViewsLayout>
+          <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <HodViewsLayout>
+              <AddProduct />
+            </HodViewsLayout>
+          </ProtectedRoute>
         }
       />
 
