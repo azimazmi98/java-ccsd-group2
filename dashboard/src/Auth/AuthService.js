@@ -13,8 +13,8 @@ const AuthService = {
             
         // },
 
-        const response = await axios.get(
-          `${API_BASE_URL}/api/users`, // Use the correct endpoint for sign-in
+        const response = await axios.post(
+          `${API_BASE_URL}/api/users/sign-in`, // Use the correct endpoint for sign-in
           { email, password }, // Pass email and password in the request body
 
 
