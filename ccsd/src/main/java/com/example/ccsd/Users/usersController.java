@@ -45,10 +45,10 @@ public class usersController {
     //      List<users> usersList = usersService.getAllUsers();
     //      return ResponseEntity.ok(usersList);
     //  }
- 
-   
 
-    
+
+
+
     @GetMapping
     public List<users> getAllUsers() {
     List<users> usersList = usersService.getAllUsers();  // Get all products
@@ -63,7 +63,7 @@ public class usersController {
             .collect(Collectors.toList());  // Collect the processed users back into a list
     }
 
-    // get user by id 
+    // get user by id
     @GetMapping("/{id}")
     public ResponseEntity<users> getUserById(@PathVariable String UserId) {
         return usersService.getUserById(UserId)
@@ -74,19 +74,19 @@ public class usersController {
     // @PostMapping
     // public users addUser(@RequestBody users users) {
     //     return usersService.addUser(users);
-  
+
     // }
 
     //prev addUser
     // @PostMapping
     // public users addUser(@RequestBody users users, @RequestParam("file") MultipartFile profPic) {
     //     return usersService.addUser(users);
-  
+
     // }
 // addUser v2
     ////////////////////////////////////////////
     /// //email, password, firstName, lastName, phone, address, role, userName, dob, image --sir's example
-    
+
  @PostMapping
     public ResponseEntity<Map<String, Object>> addUser(
             @RequestParam("email") String email,
@@ -98,8 +98,8 @@ public class usersController {
             @RequestParam("role") String role,
             @RequestParam("username") String username,
             @RequestParam("dob") String dob,
-           
-           
+
+
             @RequestParam("profPic") MultipartFile profPic) throws IOException {
 
         // Convert the image to a byte array
@@ -116,8 +116,8 @@ public class usersController {
         users.setRole(role);
         users.setUsername(username);
         users.setDob(dob);
-       
-      
+
+
         users.setProfPic(imageBytes); //store image as byte array
 
 
@@ -128,7 +128,7 @@ public class usersController {
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("users", savedusers);
-        
+
         return ResponseEntity.ok(response);
     }
 
@@ -163,7 +163,7 @@ public class usersController {
 
 //         // Save the file (in database or file system)
 //         String imageUrl = usersService.addUser(users, profPic);
-        
+
 //         return ResponseEntity.ok(imageUrl); // Return the file URL or success message
 //     } catch (Exception e) {
 //         e.printStackTrace();
@@ -208,7 +208,7 @@ public class usersController {
     //     boolean isValidUser = usersService.getUserByEmailPassword(users.getEmail(), users.getPassword());
 
     //     if (isValidUser ) {
-          
+
 
     //          // Return a success response with a redirection URL
     //          Map<String, String> response = new HashMap<>();
@@ -220,26 +220,26 @@ public class usersController {
     //     }
     // }
 
-    @PostMapping("/signin")
-public ResponseEntity<?> signIn(@RequestBody users signInRequest) {
-    // Use the service to fetch the user by email
-    users existingUser = usersService.getUserByEmail(signInRequest.getEmail());
-    
-    // Check if the user exists and passwords match
-    if (existingUser != null && existingUser.getPassword().equals(signInRequest.getPassword())) {
-        // If valid, prepare the redirection URL
-        Map<String, String> response = new HashMap<>();
-        response.put("redirectUrl", "http://localhost:3000/dashboard-admin");
-        return ResponseEntity.ok(response);
-    } else {
-        // Return an error response for invalid credentials
-        return ResponseEntity.status(401).body("Invalid email or password.");
+    @PostMapping("/sign-in")
+    public ResponseEntity<?> signIn(@RequestBody users signInRequest) {
+        // Use the service to fetch the user by email
+        users existingUser = usersService.getUserByEmail(signInRequest.getEmail());
+
+        // Check if the user exists and passwords match
+        if (existingUser != null && existingUser.getPassword().equals(signInRequest.getPassword())) {
+            // If valid, prepare the redirection URL
+            Map<String, String> response = new HashMap<>();
+            response.put("redirectUrl", "http://localhost:3000/dashboard-admin");
+            return ResponseEntity.ok(response);
+        } else {
+            // Return an error response for invalid credentials
+            return ResponseEntity.status(401).body("Invalid email or password.");
+        }
     }
+
+
 }
- 
-
-}
 
 
-    
+
 

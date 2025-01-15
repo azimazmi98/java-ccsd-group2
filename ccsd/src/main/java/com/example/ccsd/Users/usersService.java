@@ -11,6 +11,11 @@ public class usersService {
     @Autowired
     private usersRepository usersRepository;
 
- 
+    public users getUserByEmail(String email) {
+        return usersRepository.findAll().stream()
+                .filter(users -> users.getEmail().equals(email))
+                .findFirst()
+                .orElse(null);
+    }
     
 }
