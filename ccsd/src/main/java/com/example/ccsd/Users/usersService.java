@@ -25,19 +25,37 @@ public class usersService {
 
     public users addUser(users usersDetails){
 
-        users addUser = null;
-        return addUser;
+        usersRepository.save(usersDetails);
+        return usersDetails;
     }
 
     public users updateUser(String userId, users usersDetails){
 
-        users updateUser = null;
-        return updateUser;
+        // Find the existing user by ID
+        users existingUser = usersRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        // Update the fields of the existing user with the new details
+        existingUser.setFirstName(usersDetails.getFirstName());
+        existingUser.setLastName(usersDetails.getLastName());
+        existingUser.setEmail(usersDetails.getEmail());
+        existingUser.setPhoneNumber(usersDetails.getPhoneNumber());
+        existingUser.setAddress(usersDetails.getAddress());
+        existingUser.setRole(usersDetails.getRole());
+        existingUser.setUsername(usersDetails.getUsername());
+        existingUser.setDob(usersDetails.getDob());
+
+        // Save the updated user back to the repository
+        return usersRepository.save(existingUser);
     }
 
     public Optional<users> deleteUser(String userId){
 
-        return usersRepository.findById(userId);
+        users existingUser = usersRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+
+        usersRepository.delete(existingUser);
+        return Optional.empty();
     }
 
 }

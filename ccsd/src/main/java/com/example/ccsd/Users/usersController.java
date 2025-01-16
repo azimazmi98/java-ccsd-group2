@@ -49,23 +49,23 @@ public class usersController {
    
 
     
-    @GetMapping
-    public List<users> getAllUsers() {
-    List<users> usersList = usersService.getAllUsers();  // Get all products
-
-    // Process each users in the list
-    return usersList.stream()
-            .map(users -> {
-                // Add Base64 encoded image to each users
-                users.setImageStore64String(users.getImageAsBase64());
-                return users;
-            })
-            .collect(Collectors.toList());  // Collect the processed users back into a list
-    }
+//    @GetMapping
+//    public List<users> getAllUsers() {
+//    List<users> usersList = usersService.getAllUsers();  // Get all products
+//
+//    // Process each users in the list
+//    return usersList.stream()
+//            .map(users -> {
+//                // Add Base64 encoded image to each users
+//                users.setImageStore64String(users.getImageAsBase64());
+//                return users;
+//            })
+//            .collect(Collectors.toList());  // Collect the processed users back into a list
+//    }
 
     // get user by id 
     @GetMapping("/{id}")
-    public ResponseEntity<users> getUserById(@PathVariable String UserId) {
+    public ResponseEntity<users> getUserById(@PathVariable("id") String UserId) {
         return usersService.getUserById(UserId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -87,7 +87,7 @@ public class usersController {
     ////////////////////////////////////////////
     /// //email, password, firstName, lastName, phone, address, role, userName, dob, image --sir's example
     
- @PostMapping
+ @PostMapping("/addUser")
     public ResponseEntity<Map<String, Object>> addUser(
             @RequestParam("email") String email,
             @RequestParam("password") String password,
@@ -97,13 +97,14 @@ public class usersController {
             @RequestParam("address") String address,
             @RequestParam("role") String role,
             @RequestParam("username") String username,
-            @RequestParam("dob") String dob,
+            @RequestParam("dob") String dob
            
            
-            @RequestParam("profPic") MultipartFile profPic) throws IOException {
+//            @RequestParam("profPic") MultipartFile profPic
+ ) throws IOException {
 
         // Convert the image to a byte array
-        byte[] imageBytes = profPic.getBytes();  // Get image data
+//        byte[] imageBytes = profPic.getBytes();  // Get image data
 
         // Create a new users instance
         users users = new users();
@@ -118,7 +119,7 @@ public class usersController {
         users.setDob(dob);
        
       
-        users.setProfPic(imageBytes); //store image as byte array
+//        users.setProfPic(imageBytes); //store image as byte array
 
 
         // Save the users in MongoDB
@@ -171,7 +172,7 @@ public class usersController {
 //     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<users> updateUser(@PathVariable String id, @RequestBody users usersDetails) {
+    public ResponseEntity<users> updateUser(@PathVariable("id") String id, @RequestBody users usersDetails) {
         users updatedusers = usersService.updateUser(id, usersDetails);
         if (updatedusers != null) {
             return ResponseEntity.ok(updatedusers);
@@ -180,7 +181,7 @@ public class usersController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String userId) {
+    public ResponseEntity<users> deleteUser(@PathVariable("id") String userId) {
         usersService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
