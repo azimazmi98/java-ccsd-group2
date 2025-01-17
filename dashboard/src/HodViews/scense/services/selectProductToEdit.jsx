@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import GetData from '../data/getData';
+import GetData from '../../../data/getData';
 
 const SelectProductToEdit = () => {
   const [products, setProducts] = useState([]);
