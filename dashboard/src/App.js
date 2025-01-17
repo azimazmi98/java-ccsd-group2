@@ -18,6 +18,7 @@ import "./App.css";
 import Payment from "./payment/payment";
 import ProtectedRoute from "./Auth/ProtectedRoute";
 import { useState } from "react";
+import RegisterCustomer from "./register-customer/register-customer";
 
 const HodViewsLayout = ({ children }) => {
   const [theme, colorMode] = useMode();
@@ -56,6 +57,12 @@ function App() {
         path="/sign-in"
         element={
           <SignInSide setIsAuthenticated={setIsAuthenticated} />
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <RegisterCustomer />
         }
       />
       <Route
