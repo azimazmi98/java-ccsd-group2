@@ -13,6 +13,8 @@ const Services = () => {
         { title: "Add Products", imageUrl: "url-to-image1.jpg", description: "You can add product price and descriptions", link: "/add-product" },
         // { title: "Edit Products", imageUrl: "url-to-image2.jpg", description: "You can edit product price and descriptions", link: "/services/subjects" },
         // { title: "Delete Products", imageUrl: "url-to-image3.jpg", description: "You can delete already added products", link: "/classes" },
+        { title: "Edit Products", imageUrl: "url-to-image2.jpg", description: "You can edit product price and descriptions", link: "/select-product-to-edit" },
+        { title: "Delete Products", imageUrl: "url-to-image3.jpg", description: "You can delete already added products", link: "/classes" },
 
     ];
 
@@ -54,5 +56,3 @@ const Services = () => {
 };
 
 export default Services;
-
-
