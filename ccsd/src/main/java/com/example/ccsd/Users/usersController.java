@@ -33,19 +33,19 @@ public class usersController {
     @Autowired
     private usersService usersService;
 
-    // @GetMapping
-    // public List<users> getAllUsers() {
-    //     return usersService.getAllUsers();
+     @GetMapping("/fetchAll")
+     public List<users> getAllUsers() {
+         return usersService.getAllUsers();
 
-    // }
+     }
 
-    //  // Endpoint to get all users
-    //  @GetMapping
-    //  public ResponseEntity<List<users>> getAllUsersTeam() {
-    //      List<users> usersList = usersService.getAllUsers();
-    //      return ResponseEntity.ok(usersList);
-    //  }
- 
+//      // Endpoint to get all users
+//      @GetMapping("/role/{role}")
+//      public ResponseEntity<List<users>> getAllUsersTeam() {
+//          List<users> usersList = usersService.getAllUsers();
+//          return ResponseEntity.ok(usersList);
+//      }
+//
    
 
     
@@ -170,6 +170,9 @@ public class usersController {
 //         e.printStackTrace();
 //         return ResponseEntity.status(500).body("Error uploading the file.");
 //     }
+
+    //fetch data using Id
+    //update requested data
 
     @PutMapping("/{id}")
     public ResponseEntity<users> updateUser(@PathVariable("id") String id, @RequestBody users usersDetails) {
