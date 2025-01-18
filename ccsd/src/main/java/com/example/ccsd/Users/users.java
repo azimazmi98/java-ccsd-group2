@@ -3,10 +3,14 @@ package com.example.ccsd.Users;
 
 
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
 public class users {
+
+    @Id
+    private String userId;
 
     private String email;
     private String password;
@@ -17,6 +21,7 @@ public class users {
     private String role;
     private String username;
     private String dob;
+    private String base64String;
 
     private byte[] profPic;
 
@@ -61,10 +66,10 @@ public class users {
         return profPic;
     }
 
+//    public String getImageAsBase64() {return base64String;}
+
     //Setter
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email) { this.email = email; }
 
     public void setPassword(String password){
         this.password = password;
@@ -101,4 +106,6 @@ public class users {
     public void setProfPic(byte[] imageBytes) {
         this.profPic = imageBytes;
     }
+
+//    public void setImageStore64String(String imageAsBase64) { this.base64String = base64String;}
 }
