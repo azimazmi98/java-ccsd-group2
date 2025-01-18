@@ -21,7 +21,7 @@ export const About = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setPostShortDescription(data);
+        setPostShortDescription(Array.isArray(data) ? data : []);
       })
       .catch((error) => console.error("Error fetching website texts:", error));
   }, []);
