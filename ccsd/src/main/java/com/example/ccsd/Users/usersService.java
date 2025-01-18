@@ -36,14 +36,37 @@ public class usersService {
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
 
         // Update the fields of the existing user with the new details
-        existingUser.setFirstName(usersDetails.getFirstName());
-        existingUser.setLastName(usersDetails.getLastName());
-        existingUser.setEmail(usersDetails.getEmail());
-        existingUser.setPhoneNumber(usersDetails.getPhoneNumber());
-        existingUser.setAddress(usersDetails.getAddress());
-        existingUser.setRole(usersDetails.getRole());
-        existingUser.setUsername(usersDetails.getUsername());
-        existingUser.setDob(usersDetails.getDob());
+        if (usersDetails.getFirstName() != null) {
+            existingUser.setFirstName(usersDetails.getFirstName());
+        }
+
+        if (usersDetails.getLastName() != null) {
+            existingUser.setLastName(usersDetails.getLastName());
+        }
+
+        if (usersDetails.getEmail() != null) {
+            existingUser.setEmail(usersDetails.getEmail());
+        }
+
+        if (usersDetails.getPhoneNumber() != null) {
+            existingUser.setPhoneNumber(usersDetails.getPhoneNumber());
+        }
+
+        if (usersDetails.getAddress() != null) {
+            existingUser.setAddress(usersDetails.getAddress());
+        }
+
+        if (usersDetails.getRole() != null) {
+            existingUser.setRole(usersDetails.getRole());
+        }
+
+        if (usersDetails.getUsername() != null) {
+            existingUser.setUsername(usersDetails.getUsername());
+        }
+
+        if (usersDetails.getDob() != null) {
+            existingUser.setDob(usersDetails.getDob());
+        }
 
         // Save the updated user back to the repository
         return usersRepository.save(existingUser);
