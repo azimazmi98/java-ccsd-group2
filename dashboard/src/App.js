@@ -10,6 +10,8 @@ import SignInSide from "./FrontEnd/scense/SignInSide";
 import WebsiteComponentsAdmin from "./HodViews/scense/websites/websiteComponents";
 import Services from "./HodViews/scense/services";
 import AddProduct from "./HodViews/scense/services/addProduct";
+import EditProduct from "./HodViews/scense/services/EditProducts"; //newly created
+import SelectProductToEdit from "./HodViews/scense/services/selectProductToEdit"; //newly created
 import AddWebsiteText from "./HodViews/scense/websites/addWebsiteTexts";
 import AddWebsiteImage from "./HodViews/scense/websites/addWebsiteImage";
 import AddWebsiteGallery from "./HodViews/scense/websites/addWebsiteGallery";
@@ -46,7 +48,7 @@ function App() {
 
   return (
     <Routes>
-      
+
       <Route
         path="/"
         element={
@@ -162,7 +164,24 @@ function App() {
         }
       />
 
-      
+            <Route
+              path="/select-product-to-edit"
+              element={
+                <HodViewsLayout>
+                  <SelectProductToEdit />
+                </HodViewsLayout>
+              }
+            />
+        {/* New Route for Editing Products */}
+        <Route
+          path="/edit-product/:id" // Dynamic route to accept product ID
+          element={
+            <HodViewsLayout>
+              <EditProduct />
+            </HodViewsLayout>
+          }
+        />
+
     </Routes>
   );
 }
